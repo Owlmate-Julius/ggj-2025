@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=4 uid="uid://b6ypcd6y8op5w"]
+
+[ext_resource type="Texture2D" uid="uid://cqcsb18hr1fxx" path="res://assets/wall1.png" id="1_ctl5y"]
+[ext_resource type="Texture2D" uid="uid://6rj063ryka5u" path="res://assets/floor1.png" id="2_bmnan"]
+[ext_resource type="Texture2D" uid="uid://cubr2nhnb18kt" path="res://assets/door1.png" id="2_rnfg3"]
+[ext_resource type="PackedScene" uid="uid://c4nxq08n0sc17" path="res://customer_manager.tscn" id="4_rnfg3"]
+[ext_resource type="Texture2D" uid="uid://b2l8ea54gmfhj" path="res://assets/payment_table.png" id="5_qeh4v"]
+[ext_resource type="Texture2D" uid="uid://cqqv56t2kcxsp" path="res://assets/table1.png" id="6_t1efv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rnfg3"]
+texture = ExtResource("1_ctl5y")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qeh4v"]
+texture = ExtResource("2_bmnan")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_t1efv"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_rnfg3")
+sources/2 = SubResource("TileSetAtlasSource_qeh4v")
+
+[sub_resource type="Curve2D" id="Curve2D_qeh4v"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 14, 97, 0, 0, 0, 0, 17, 101, 0, 0, 0, 0, 135, 101)
+}
+point_count = 3
+
+[node name="Store" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAADAAIAAQAAAAAAAAACAAIAAQAAAAAAAAABAAIAAQAAAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAAAAMAAgAAAAAAAAABAAMAAgAAAAAAAAACAAMAAgAAAAAAAAADAAMAAgAAAAAAAAAEAAMAAgAAAAAAAAAFAAMAAgAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAGAAMAAgAAAAAAAAAHAAMAAgAAAAAAAAA=")
+tile_set = SubResource("TileSet_t1efv")
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(13, 82)
+texture = ExtResource("2_rnfg3")
+
+[node name="CustomerManager" parent="." node_paths=PackedStringArray("customer_queue_path", "path_end") instance=ExtResource("4_rnfg3")]
+customer_queue_path = NodePath("CustomerQueue")
+path_end = NodePath("CustomerQueue/PathEnd")
+
+[node name="CustomerQueue" type="Path2D" parent="CustomerManager"]
+curve = SubResource("Curve2D_qeh4v")
+
+[node name="PathEnd" type="PathFollow2D" parent="CustomerManager/CustomerQueue"]
+position = Vector2(121.125, 101)
+rotation = 1.3734
+progress = 109.099
+rotates = false
+loop = false
+
+[node name="PaymentTable" type="Sprite2D" parent="."]
+position = Vector2(153, 96)
+texture = ExtResource("5_qeh4v")
+
+[node name="Table1" type="Sprite2D" parent="."]
+position = Vector2(210, 83)
+texture = ExtResource("6_t1efv")

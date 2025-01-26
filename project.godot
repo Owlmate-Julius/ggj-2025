@@ -1,0 +1,27 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="ggj-2025"
+run/main_scene="uid://b6ypcd6y8op5w"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=256
+window/size/viewport_height=128
+window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

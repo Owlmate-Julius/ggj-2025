@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4nxq08n0sc17"]
+
+[ext_resource type="Script" uid="uid://bawcro3s6a8a7" path="res://customer_manager.gd" id="1_uxglp"]
+[ext_resource type="PackedScene" uid="uid://dmtqgnd7nq2e1" path="res://entities/customer/customer.tscn" id="2_3gnd4"]
+
+[node name="CustomerManager" type="Node2D"]
+script = ExtResource("1_uxglp")
+CustomerScene = ExtResource("2_3gnd4")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

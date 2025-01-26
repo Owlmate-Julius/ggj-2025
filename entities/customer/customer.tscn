@@ -1,0 +1,133 @@
+[gd_scene load_steps=11 format=3 uid="uid://dmtqgnd7nq2e1"]
+
+[ext_resource type="Script" uid="uid://dwy1nxahq8q2b" path="res://entities/customer/customer.gd" id="1_r8ta2"]
+[ext_resource type="PackedScene" uid="uid://bu5y7wqklyy23" path="res://entities/customer/customer_look.tscn" id="2_r1km4"]
+[ext_resource type="Texture2D" uid="uid://c13egx6rhesmd" path="res://assets/order_bubble.png" id="3_ahyps"]
+[ext_resource type="Texture2D" uid="uid://uy7i7u3b28n5" path="res://assets/bubble_tea1.png" id="4_nhfij"]
+
+[sub_resource type="Animation" id="Animation_8ct44"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_r1km4"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahyps"]
+_data = {
+&"RESET": SubResource("Animation_8ct44"),
+&"appear": SubResource("Animation_r1km4")
+}
+
+[sub_resource type="Animation" id="Animation_ahyps"]
+resource_name = "hover"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector2(-5, -35), Vector2(-5, -33)]
+}
+
+[sub_resource type="Animation" id="Animation_nhfij"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -35)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j6trb"]
+_data = {
+&"RESET": SubResource("Animation_nhfij"),
+&"hover": SubResource("Animation_ahyps")
+}
+
+[node name="Customer" type="Node2D"]
+script = ExtResource("1_r8ta2")
+
+[node name="CustomerLook" parent="." instance=ExtResource("2_r1km4")]
+
+[node name="GFX" type="AnimationPlayer" parent="CustomerLook"]
+libraries = {
+&"": SubResource("AnimationLibrary_ahyps")
+}
+
+[node name="OrderBubble" type="Node2D" parent="."]
+visible = false
+position = Vector2(-5, -35)
+metadata/_edit_group_ = true
+
+[node name="OrderBubbleSprite" type="Sprite2D" parent="OrderBubble"]
+texture = ExtResource("3_ahyps")
+
+[node name="BubbleTeaSprite" type="Sprite2D" parent="OrderBubble"]
+position = Vector2(0, -2)
+texture = ExtResource("4_nhfij")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OrderBubble"]
+libraries = {
+&"": SubResource("AnimationLibrary_j6trb")
+}
+autoplay = "hover"
+
+[connection signal="animation_finished" from="CustomerLook/GFX" to="." method="_on_gfx_animation_finished"]
