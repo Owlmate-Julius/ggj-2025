@@ -6,16 +6,26 @@ class_name CustomerManager extends Node2D
 @export var customer_distance := 20.0
 @export var path_end : PathFollow2D
 @export var walking_speed := 4.0
+@export var exit_door : Marker2D
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
 var customer_count := 0
 var path_follow_queue : Array[PathFollow2D] = []
+var current_customer : Customer
 
 
 func _ready() -> void:
 	spawn_timer.start()
 	spawn_timer.wait_time = 3.0
+	GlobalEvents.customer_order.connect(func(customer):
+		current_customer = customer
+	)
+	GlobalEvents.deliver_order.connect(func():
+		current_customer.receive_order()
+		current_customer.leave_store(exit_door.global_position)
+		remove_first_from_queue()
+	)
 
 
 func _process(delta: float) -> void:
@@ -43,6 +53,8 @@ func spawn_customer() -> void:
 	)
 
 
+
+
 func append_to_queue(customer : Customer) -> PathFollow2D:
 	var path_follow = PathFollow2D.new()
 	path_follow.rotates = false
@@ -57,6 +69,8 @@ func remove_first_from_queue() -> void:
 	var path_follow : PathFollow2D = path_follow_queue.pop_front() as PathFollow2D
 	var customer : Customer = path_follow.get_child(0)
 	path_follow.remove_child(customer)
+	add_child(customer)
+	customer.global_position = path_follow.global_position
 	path_follow.queue_free()
 
 

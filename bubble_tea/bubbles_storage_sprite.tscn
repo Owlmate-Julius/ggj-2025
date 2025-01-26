@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwj2g1d2sixhi"]
+
+[ext_resource type="Texture2D" uid="uid://ntka80q2tyav" path="res://assets/bubble_tea/bubbles_storage.png" id="1_8ohlu"]
+[ext_resource type="Script" uid="uid://be0w4jbep8bi1" path="res://bubble_tea/bubbles_storage_sprite.gd" id="1_rrdc5"]
+[ext_resource type="PackedScene" uid="uid://f562lm7gicfx" path="res://components/interaction_component.tscn" id="2_fjlyx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrdc5"]
+size = Vector2(2, 20)
+
+[node name="BubblesStorage" type="Area2D"]
+script = ExtResource("1_rrdc5")
+
+[node name="BubblesStorageSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("1_8ohlu")
+
+[node name="InteractionComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_fjlyx")]
+sprite = NodePath("../BubblesStorageSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent"]
+shape = SubResource("RectangleShape2D_rrdc5")
+
+[connection signal="has_interacted" from="InteractionComponent" to="." method="_on_interaction_component_has_interacted"]

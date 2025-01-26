@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0gck02ek13jc"]
+
+[ext_resource type="Texture2D" uid="uid://5aeja7iushur" path="res://assets/bubble_tea/glas_stack.png" id="1_7aegd"]
+[ext_resource type="Script" uid="uid://sflsv0xw8fbx" path="res://bubble_tea/glases.gd" id="1_q4hcy"]
+[ext_resource type="PackedScene" uid="uid://f562lm7gicfx" path="res://components/interaction_component.tscn" id="2_uihs8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4hcy"]
+size = Vector2(2, 20)
+
+[node name="Glases" type="Area2D"]
+script = ExtResource("1_q4hcy")
+
+[node name="GlasStack" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("1_7aegd")
+
+[node name="InteractionComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_uihs8")]
+sprite = NodePath("../GlasStack")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent"]
+shape = SubResource("RectangleShape2D_q4hcy")
+
+[connection signal="has_interacted" from="InteractionComponent" to="." method="_on_interaction_component_has_interacted"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnfnf5sgk0qvg"]
+
+[ext_resource type="Texture2D" uid="uid://b2l8ea54gmfhj" path="res://assets/payment_table.png" id="1_ioxfw"]
+[ext_resource type="Script" uid="uid://b7a77s8vvtai7" path="res://store/payment_table.gd" id="1_n0b4b"]
+[ext_resource type="PackedScene" uid="uid://f562lm7gicfx" path="res://components/interaction_component.tscn" id="2_2sikd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0b4b"]
+size = Vector2(20, 19)
+
+[node name="PaymentTable" type="StaticBody2D"]
+script = ExtResource("1_n0b4b")
+
+[node name="PaymentTable" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("1_ioxfw")
+
+[node name="InteractionComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_2sikd")]
+sprite = NodePath("../PaymentTable")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent"]
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_n0b4b")
+
+[connection signal="has_interacted" from="InteractionComponent" to="." method="_on_interaction_component_has_interacted"]

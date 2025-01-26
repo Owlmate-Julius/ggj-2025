@@ -1,11 +1,33 @@
-[gd_scene load_steps=11 format=4 uid="uid://b6ypcd6y8op5w"]
+[gd_scene load_steps=36 format=4 uid="uid://b6ypcd6y8op5w"]
 
-[ext_resource type="Texture2D" uid="uid://cqcsb18hr1fxx" path="res://assets/wall1.png" id="1_ctl5y"]
-[ext_resource type="Texture2D" uid="uid://6rj063ryka5u" path="res://assets/floor1.png" id="2_bmnan"]
+[ext_resource type="Texture2D" uid="uid://cqcsb18hr1fxx" path="res://assets/walls/wall2.png" id="1_ctl5y"]
+[ext_resource type="Texture2D" uid="uid://btn72wykrflli" path="res://assets/walls/wall1.png" id="1_tc1w7"]
+[ext_resource type="Texture2D" uid="uid://6rj063ryka5u" path="res://assets/floor/floor1.png" id="2_bmnan"]
 [ext_resource type="Texture2D" uid="uid://cubr2nhnb18kt" path="res://assets/door1.png" id="2_rnfg3"]
 [ext_resource type="PackedScene" uid="uid://c4nxq08n0sc17" path="res://customer_manager.tscn" id="4_rnfg3"]
-[ext_resource type="Texture2D" uid="uid://b2l8ea54gmfhj" path="res://assets/payment_table.png" id="5_qeh4v"]
+[ext_resource type="Texture2D" uid="uid://cbk2yeb8mbqut" path="res://assets/walls/wall1_bottom.png" id="4_tighr"]
+[ext_resource type="Texture2D" uid="uid://pp8nvpfxqk6m" path="res://assets/floor/floor2.png" id="5_cx2sc"]
+[ext_resource type="Texture2D" uid="uid://usa2fosx8na2" path="res://assets/shelf1.png" id="6_hnp85"]
+[ext_resource type="Texture2D" uid="uid://ewkokwoe6iyd" path="res://assets/walls/top_wall1.png" id="6_p7tfx"]
 [ext_resource type="Texture2D" uid="uid://cqqv56t2kcxsp" path="res://assets/table1.png" id="6_t1efv"]
+[ext_resource type="PackedScene" uid="uid://cnfnf5sgk0qvg" path="res://store/payment_table.tscn" id="7_2hwkp"]
+[ext_resource type="PackedScene" uid="uid://dbuyiu2gu23ee" path="res://player/player.tscn" id="7_5yy1p"]
+[ext_resource type="Texture2D" uid="uid://c86estr8eqodv" path="res://assets/decorations/deco1.png" id="7_e7klb"]
+[ext_resource type="PackedScene" uid="uid://ce80dfr3m3440" path="res://bubble_tea/bubble_tea_shaker.tscn" id="8_2hwkp"]
+[ext_resource type="PackedScene" uid="uid://d0gck02ek13jc" path="res://bubble_tea/glases.tscn" id="8_06xaj"]
+[ext_resource type="PackedScene" uid="uid://dotdfj1xordc0" path="res://bubble_tea/bubble_tea_mixer.tscn" id="8_afbdi"]
+[ext_resource type="Texture2D" uid="uid://y4xofovu3lxl" path="res://assets/decorations/poster1.png" id="9_1ofi5"]
+[ext_resource type="PackedScene" uid="uid://dygqnrnnn6qkm" path="res://entities/cow/cow.tscn" id="11_nvavx"]
+[ext_resource type="Script" uid="uid://dblsmxry5m30y" path="res://player/player_camera.gd" id="12_ay34p"]
+[ext_resource type="PackedScene" uid="uid://dwj2g1d2sixhi" path="res://bubble_tea/bubbles_storage_sprite.tscn" id="13_0r31n"]
+[ext_resource type="Texture2D" uid="uid://dolvf4wyll6i5" path="res://assets/decorations/lantern.png" id="14_gba53"]
+[ext_resource type="Texture2D" uid="uid://d2cntxwctpobk" path="res://assets/decorations/light.png" id="15_fk5dc"]
+[ext_resource type="PackedScene" uid="uid://b5dkmp6qs3v4l" path="res://gui/prepararation_step_ui.tscn" id="23_lfoie"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tighr"]
+texture = ExtResource("1_tc1w7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rnfg3"]
 texture = ExtResource("1_ctl5y")
@@ -17,10 +39,29 @@ texture = ExtResource("2_bmnan")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cx2sc"]
+texture = ExtResource("4_tighr")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p7tfx"]
+texture = ExtResource("5_cx2sc")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gba53"]
+texture = ExtResource("6_p7tfx")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_t1efv"]
 tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_rnfg3")
 sources/2 = SubResource("TileSetAtlasSource_qeh4v")
+sources/0 = SubResource("TileSetAtlasSource_tighr")
+sources/3 = SubResource("TileSetAtlasSource_cx2sc")
+sources/4 = SubResource("TileSetAtlasSource_p7tfx")
+sources/5 = SubResource("TileSetAtlasSource_gba53")
 
 [sub_resource type="Curve2D" id="Curve2D_qeh4v"]
 _data = {
@@ -28,19 +69,112 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="Animation" id="Animation_lfoie"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LanternSprite/PointLight2D2:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LanternSprite2/PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LanternSprite3/PointLight2D3:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_fk5dc"]
+resource_name = "glow"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LanternSprite/PointLight2D2:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.23333, 1.92),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.4, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LanternSprite2/PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.22, 1.93),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.8, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LanternSprite3/PointLight2D3:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.7, 1.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_52003"]
+_data = {
+&"RESET": SubResource("Animation_lfoie"),
+&"glow": SubResource("Animation_fk5dc")
+}
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fk5dc"]
+polygon = PackedVector2Array(-25, -8, 403, -18, 391, 16, -26, 16)
+
 [node name="Store" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAADAAIAAQAAAAAAAAACAAIAAQAAAAAAAAABAAIAAQAAAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAAAAMAAgAAAAAAAAABAAMAAgAAAAAAAAACAAMAAgAAAAAAAAADAAMAAgAAAAAAAAAEAAMAAgAAAAAAAAAFAAMAAgAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAGAAMAAgAAAAAAAAAHAAMAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAIAAwAAAAAAAAAAAAEAAAAAAAAAAAAAAAAABQAAAAAAAAABAAAABQAAAAAAAAACAAAABQAAAAAAAAADAAAABQAAAAAAAAAEAAAABQAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAwAAAAAAAAADAAIAAwAAAAAAAAACAAIAAwAAAAAAAAABAAIAAwAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAFAAAABQAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAwAAAAAAAAAAAAMABAAAAAAAAAABAAMABAAAAAAAAAACAAMABAAAAAAAAAADAAMABAAAAAAAAAAEAAMABAAAAAAAAAAFAAMABAAAAAAAAAAGAAAABQAAAAAAAAAHAAAABQAAAAAAAAAHAAIAAwAAAAAAAAAGAAIAAwAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAGAAMABAAAAAAAAAAHAAMABAAAAAAAAAAIAAIAAwAAAAAAAAAIAAEAAAAAAAAAAAAIAAAABQAAAAAAAAAJAAAABQAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAwAAAAAAAAAKAAIAAwAAAAAAAAAKAAEAAAAAAAAAAAAKAAAABQAAAAAAAAALAAAABQAAAAAAAAALAAEAAAAAAAAAAAALAAIAAwAAAAAAAAAIAAMABAAAAAAAAAAJAAMABAAAAAAAAAAKAAMABAAAAAAAAAALAAMABAAAAAAAAAA=")
 tile_set = SubResource("TileSet_t1efv")
 
 [node name="Door" type="Sprite2D" parent="."]
-position = Vector2(13, 82)
+position = Vector2(13, 81)
 texture = ExtResource("2_rnfg3")
 
-[node name="CustomerManager" parent="." node_paths=PackedStringArray("customer_queue_path", "path_end") instance=ExtResource("4_rnfg3")]
+[node name="ExitMarker" type="Marker2D" parent="Door"]
+position = Vector2(0, 16)
+
+[node name="CustomerManager" parent="." node_paths=PackedStringArray("customer_queue_path", "path_end", "exit_door") instance=ExtResource("4_rnfg3")]
 customer_queue_path = NodePath("CustomerQueue")
 path_end = NodePath("CustomerQueue/PathEnd")
+exit_door = NodePath("../Door/ExitMarker")
 
 [node name="CustomerQueue" type="Path2D" parent="CustomerManager"]
 curve = SubResource("Curve2D_qeh4v")
@@ -52,10 +186,96 @@ progress = 109.099
 rotates = false
 loop = false
 
-[node name="PaymentTable" type="Sprite2D" parent="."]
-position = Vector2(153, 96)
-texture = ExtResource("5_qeh4v")
-
 [node name="Table1" type="Sprite2D" parent="."]
-position = Vector2(210, 83)
+position = Vector2(210, 90)
 texture = ExtResource("6_t1efv")
+
+[node name="Shelf1" type="Sprite2D" parent="."]
+position = Vector2(194, 63)
+texture = ExtResource("6_hnp85")
+
+[node name="Deco1" type="Sprite2D" parent="Shelf1"]
+position = Vector2(-2, -8)
+texture = ExtResource("7_e7klb")
+
+[node name="PaymentTable" parent="." instance=ExtResource("7_2hwkp")]
+z_index = 1
+position = Vector2(148, 105)
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Poster1" type="Sprite2D" parent="Decorations"]
+position = Vector2(238, 55)
+texture = ExtResource("9_1ofi5")
+
+[node name="LanternSprite" type="Sprite2D" parent="Decorations"]
+position = Vector2(52, 28)
+texture = ExtResource("14_gba53")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Decorations/LanternSprite"]
+position = Vector2(0, 18)
+texture = ExtResource("15_fk5dc")
+texture_scale = 2.43
+
+[node name="LanternSprite2" type="Sprite2D" parent="Decorations"]
+position = Vector2(153, 28)
+texture = ExtResource("14_gba53")
+
+[node name="PointLight2D" type="PointLight2D" parent="Decorations/LanternSprite2"]
+position = Vector2(0, 20)
+texture = ExtResource("15_fk5dc")
+texture_scale = 2.43
+
+[node name="LanternSprite3" type="Sprite2D" parent="Decorations"]
+position = Vector2(253, 28)
+texture = ExtResource("14_gba53")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Decorations/LanternSprite3"]
+position = Vector2(1, 19)
+texture = ExtResource("15_fk5dc")
+texture_scale = 2.43
+
+[node name="LightAnimationPlayer" type="AnimationPlayer" parent="Decorations"]
+libraries = {
+&"": SubResource("AnimationLibrary_52003")
+}
+autoplay = "glow"
+
+[node name="BubbleTeaShaker" parent="." instance=ExtResource("8_2hwkp")]
+position = Vector2(227, 86)
+
+[node name="BubbleTeaMixer" parent="." instance=ExtResource("8_afbdi")]
+position = Vector2(208, 86)
+
+[node name="BubblesStorage" parent="." instance=ExtResource("13_0r31n")]
+position = Vector2(193, 85)
+
+[node name="Glases" parent="." instance=ExtResource("8_06xaj")]
+position = Vector2(242, 85)
+
+[node name="Cow" parent="." instance=ExtResource("11_nvavx")]
+position = Vector2(268, 98)
+
+[node name="Player" parent="." instance=ExtResource("7_5yy1p")]
+position = Vector2(178, 102)
+
+[node name="PlayerCamera" type="Camera2D" parent="Player" node_paths=PackedStringArray("player")]
+position = Vector2(0, -38)
+limit_left = 0
+limit_right = 350
+position_smoothing_speed = 7.0
+drag_horizontal_enabled = true
+drag_left_margin = 0.1
+drag_right_margin = 0.1
+script = ExtResource("12_ay34p")
+player = NodePath("..")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.88, 0.88, 0.88, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_fk5dc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PrepararationStepUI" parent="CanvasLayer" instance=ExtResource("23_lfoie")]

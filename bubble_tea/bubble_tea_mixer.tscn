@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dotdfj1xordc0"]
+
+[ext_resource type="Script" uid="uid://co24kxg3t1v5u" path="res://bubble_tea/bubble_tea_mixer.gd" id="1_4hj3v"]
+[ext_resource type="Texture2D" uid="uid://cq0hv3bsuybtf" path="res://assets/bubble_tea/mixer1.png" id="1_46a8d"]
+[ext_resource type="PackedScene" uid="uid://f562lm7gicfx" path="res://components/interaction_component.tscn" id="2_l63if"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4hj3v"]
+size = Vector2(2, 20)
+
+[node name="BubbleTeaMixer" type="Area2D"]
+script = ExtResource("1_4hj3v")
+
+[node name="Mixer1" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("1_46a8d")
+
+[node name="InteractionComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_l63if")]
+sprite = NodePath("../Mixer1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent"]
+shape = SubResource("RectangleShape2D_4hj3v")
+
+[connection signal="has_interacted" from="InteractionComponent" to="." method="_on_interaction_component_has_interacted"]

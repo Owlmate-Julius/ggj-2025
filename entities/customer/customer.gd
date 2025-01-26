@@ -12,6 +12,7 @@ signal is_leaving
 @onready var order_bubble: Node2D = $OrderBubble
 
 var last_position := Vector2.ZERO
+var current_target_position : Vector2
 
 enum States {
 	APPEAR,
@@ -38,8 +39,12 @@ func _physics_process(delta: float) -> void:
 		if path_follow.progress_ratio >= 0.98:
 			emit_signal("is_ordering")
 			current_state = States.ORDER
+			GlobalEvents.customer_order.emit(self)
 			enter_order_state()
 			customer_look.anim.play("idle")
+	if current_state == States.LEAVE:
+		global_position = global_position.move_toward(current_target_position, 0.4)
+		customer_look.scale.x = -1
 
 func appear() -> void:
 	gfx.play("appear")
@@ -47,6 +52,16 @@ func appear() -> void:
 
 func enter_order_state():
 	order_bubble.visible = true
+
+
+func receive_order():
+	order_bubble.visible = false
+
+
+func leave_store(target_position):
+	current_state = States.LEAVE
+	current_target_position = target_position
+	customer_look.anim.play("walk")
 
 
 func _on_gfx_animation_finished(anim_name: StringName) -> void:

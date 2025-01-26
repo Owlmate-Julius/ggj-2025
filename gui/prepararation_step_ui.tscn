@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5dkmp6qs3v4l"]
+
+[ext_resource type="Script" uid="uid://b635p3k66d7yf" path="res://gui/prepararation_step_ui.gd" id="1_p5l4s"]
+[ext_resource type="Texture2D" uid="uid://cev60ehhy62hs" path="res://assets/ui/ui_border1_sheet.png" id="1_ush7k"]
+
+[node name="PrepararationStepUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p5l4s")
+
+[node name="BorderSprite" type="Sprite2D" parent="."]
+position = Vector2(220, 39)
+texture = ExtResource("1_ush7k")
+hframes = 6
